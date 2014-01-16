@@ -1,0 +1,31 @@
+Draw-Waveform
+By Paul Batchelor
+
+As I've previously in other posts, I have been diving into the Cairo 2d Graphics library. This is another such program written in C using Cairo and the Sndfile library to draw waveforms from audio files that were exactly 2048 samples in size.
+
+The need for such a program comes from the Galbanum Waveform collection that I bought a few years ago. Allegedly used by NI's Massive, the Galbanum Waveform collection is a library of over 20,000 wavetable samples. These short samples can be loaded up into a wavetable synthesizer to create a very wide range of timbres. I was very excited to have downloaded these samples for about $40, but 20,000 samples is very overwhelming! Since my main plan was to use these with Csound, I had no good way of conveniently browsing and selecting the samples. 
+
+My program (with the highly creative name "Draw-Waveform") is a commandline utility that takes a command like this:
+
+./draw_waveform Sine.wav Sine.png
+
+And creates a single PNG image like this:
+
+[IMAGE GOES HERE]
+
+Every single sample in the Galbanum collection is exactly 2048 samples long (it has only one channel.) This made the program a lot easier to make. Because of its size, I could load the entire waveform into memory and read from a table. Does the Sndfile library make this easy to do? Yup. And that's all sndfile is doing. Thanks, Sndfile!
+
+Cairo is in charge of the drawing. A few things about drawing waveforms is that every sample can't be read. There are 2048 samples, and less than 200 pixels for your window. I'm not sure what the industry professionals do for drawing waveforms, but I just drew a line and used the amplitudes to determine the Y-axis (the X-axis just inched along pixel by pixel, reading every N samples.)
+
+I should mention that the color scheme was created thanks to Wikipedia's list of colors. As it turns out, there are already a lot of colors that have been invented and named. They look a lot more professional than the colors I'd try to come up with. Also, saying the colors are "Dark Jungle Green", "Dark Sky Blue", and "Bubblegum Pink" are a lot more dramatic than saying the colors are #1a2421, #8cbed6, and #ffbcd9. 
+
+The code for this program can be found on github right here: [INSERT LINK HERE].
+
+
+The second part of this process was to take this program and run it over 20,000 times to create unique PNG files for all the waveforms. Sadly, this wasn't a clean process and so I won't post the code for this. The waveform collection is divided up into about 50 categories where the waveforms are stored. I wanted to create a duplicate set of directories that contained the corresponding PNG files. I had to first create the directories, then create the PNG files. 
+
+For those unfamiliar with these sorts automation, these are trivial tasks to do if it is all from the commandline. One can easily iterate through a generated list of files and directories and repeat the same set of commands over and over. I mostly used Perl for my automation this time because of the regular expressions, but it could have all been done in a shell script had I been more familiar with grep and sed. 
+
+I'm hoping to write more about these waveforms and actually create some interesting sounds with them as well!
+
+
