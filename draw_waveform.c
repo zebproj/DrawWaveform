@@ -28,7 +28,7 @@ main (int argc, char *argv[])
 	cr = cairo_create (surface);
 	/* Examples are in 1.0 x 1.0 coordinate space */
 	int color_1 = 0x1a2421; /* Dark Jungle Green*/
-	int color_2 = 0x8cbed6; /* Cream */
+	int color_2 = 0x8cbed6; /* Dark Sky Blue*/
 	int color_3 = 0xffbcd9; /* Bubblegum Pink*/
 	/* Drawing code goes here */
 
